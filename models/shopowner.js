@@ -1,20 +1,18 @@
 const mongoose = require("mongoose");
 
-saltRounds = 10;
-
 var Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+var shopownerSchema = new Schema({
   email: {
     type: String,
     unique: true,
     required: true,
     dropDups: true,
   },
-  firstName: {
+  businessname: {
     type: String,
   },
-  lastName: {
+  username: {
     type: String,
   },
   hash: {
@@ -23,17 +21,17 @@ var userSchema = new Schema({
   tempotp: {
     type: String,
   },
-  phone: {
+  businessphone: {
     type: String,
   },
-  district: {
+  businessaddress: {
     type: String,
   },
-  deliveryddress: {
+  businessdistrict: {
     type: String,
-  }
+  },
 });
 
-const User = mongoose.model("User", userSchema);
+const ShopOwner = mongoose.model("ShopOwner", shopownerSchema);
 
-module.exports = User;
+module.exports = ShopOwner;

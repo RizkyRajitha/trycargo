@@ -1,11 +1,8 @@
 const express = require("express");
 const app = express();
 
-
-
 const cors = require("cors");
 const mongoose = require("mongoose");
-
 
 const bp = require("body-parser");
 const jwt = require("jsonwebtoken");
@@ -13,8 +10,6 @@ app.use(cors());
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 app.use(require("morgan")("dev"));
-
-
 
 const port = process.env.PORT || 5000;
 
