@@ -62,7 +62,7 @@ exports.loginshopowner = (req, res) => {
           {
             email: doc.email,
             id: doc._id,
-            type: "regular",
+            type: "owner",
           },
           jwtsecret,
           { expiresIn: "600m" }
