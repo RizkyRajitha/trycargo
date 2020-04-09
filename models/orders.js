@@ -3,11 +3,17 @@ const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
+  ownerId: {
+    type: String,
+  },
+  customerId: {
+    type: String,
+  },
   orderId: {
     type: String,
-    unique: true,
-    required: true,
-    dropDups: true,
+  },
+  date: {
+    type: String,
   },
   items: [
     {
