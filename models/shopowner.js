@@ -30,6 +30,28 @@ var shopownerSchema = new Schema({
   businessdistrict: {
     type: String,
   },
+  workinghours: {
+    type: String,
+  },
+  items: [
+    {
+      itemId: {
+        type: String,
+        unique: true,
+        required: true,
+        dropDups: true,
+      },
+      unitprice: {
+        type: String,
+      },
+      date: {
+        type: String,
+      },
+      quantity: {
+        type: String,
+      },
+    },
+  ],
 });
 
 const ShopOwner = mongoose.model("ShopOwner", shopownerSchema);
