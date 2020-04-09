@@ -16,28 +16,33 @@ exports.logincustomer = (req, res) => {
     .then((doc) => {
       console.log(doc);
 
-      var state = bcrypt.compareSync(req.body.password, doc.hash);
+      if (doc) {
+        var state = bcrypt.compareSync(req.body.password, doc.hash);
 
-      console.log(state);
+        console.log(state);
 
-      if (state) {
-        var token = jwt.sign(
-          {
-            email: doc.email,
-            id: doc._id,
-            type: "regular",
-          },
-          jwtsecret,
-          { expiresIn: "600m" }
-        );
+        if (state) {
+          var token = jwt.sign(
+            {
+              email: doc.email,
+              id: doc._id,
+              type: "customer",
+            },
+            jwtsecret,
+            { expiresIn: "600m" }
+          );
 
-        res.status(200).json({ msg: "success", token: token });
+          res.status(200).json({ msg: "success", token: token });
+        } else {
+          res.status(401).json({ msg: "invalidcredentials" });
+        }
       } else {
-        res.status(401).json({ msg: "invalidcredentials" });
+        res.status(401).json({ msg: "nouser" });
       }
     })
     .catch((err) => {
-      res.status(401).json({ msg: "nouser" });
+      console.log(err);
+      res.status(500).send("error");
     });
 };
 
@@ -69,6 +74,7 @@ exports.loginshopowner = (req, res) => {
       }
     })
     .catch((err) => {
+      console.log(err);
       res.status(401).json({ msg: "nouser" });
     });
 };

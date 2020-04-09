@@ -8,7 +8,7 @@ const jwtsecret =
   process.env.jwtsecret || require("../../config/env").jwtsecret;
 
 exports.signupcustomer = (req, res) => {
-  console.log("signup");
+  console.log("signup customer");
   var datain = req.body;
   console.log(datain);
 
@@ -36,6 +36,7 @@ exports.signupcustomer = (req, res) => {
       // });
     })
     .catch((err) => {
+      console.log(err);
       if (err.code === 11000) {
         console.log("duplicate user");
         res.status(200).json({ msg: "dupuser" });

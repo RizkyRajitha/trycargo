@@ -17,68 +17,55 @@ mongoose.Promise = global.Promise;
 //"mongodb://127.0.0.1:27017/authdb" ||
 const mongodbAPI = process.env.mongourl || require("./config/env").mongodbAPI; //keys.mongouri;
 app.use(require("morgan")("dev"));
-
-
+const jwtsecret = process.env.jwtsecret || require("./config/env").jwtsecret;
 
 var jwthelper = (req, res, next) => {
   console.log("helper .....");
   const token = req.headers.authorization;
   //  req.body.token || req.query.token || req.headers['x-access-token']
   // decode token
+  console.log(token);
   if (token) {
     // verifies secret and checks exp
-    jwt.verify(token, jwtsecret, function(err, decoded) {
+    jwt.verify(token, jwtsecret, function (err, decoded) {
       if (err) {
         console.log(err);
         return res
           .status(401)
           .json({ error: true, message: "unauthorized_access" });
       }
-      if (decoded.type === "regular") {
-        console.log("helper oK");
-        req.id = decoded.id;
 
-  
-        next();
-      } else {
-        return res
-          .status(401)
-          .json({ error: true, message: "unauthorized_access" });
-      }
+      console.log("helper oK");
+      req.id = decoded.id;
+
+      next();
     });
   } else {
     // if there is no token
     // return an error
     return res.status(403).send({
       error: true,
-      message: "no_token_provided."
+      message: "no_token_provided.",
     });
   }
 };
-
-
 
 app.use("/auth", require("./routes/auth/auth.router")); //dont add jwt middleware
 app.use("/reg", require("./routes/register/register.router")); //dont add jwt middleware
 
 app.use("/api", jwthelper, require("./routes/api/api.router"));
 
-
-
-
 try {
   mongoose.connect(
     mongodbAPI,
     { useNewUrlParser: true, useUnifiedTopology: true },
-    err => {
+    (err) => {
       if (!err) console.log("connected to mongodb sucsessfully" + "👍");
     }
   );
 } catch (error) {
   console.log(err);
 }
-
-
 
 app.listen(port, () => {
   console.log("listsing on " + port);

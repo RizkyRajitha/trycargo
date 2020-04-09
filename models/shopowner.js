@@ -14,6 +14,9 @@ var shopownerSchema = new Schema({
   },
   username: {
     type: String,
+    unique: true,
+    required: true,
+    dropDups: true,
   },
   hash: {
     type: String,
@@ -37,14 +40,14 @@ var shopownerSchema = new Schema({
     {
       itemId: {
         type: String,
-        unique: true,
-        required: true,
-        dropDups: true,
       },
       unitprice: {
         type: String,
       },
       date: {
+        type: String,
+      },
+      discription: {
         type: String,
       },
       quantity: {
