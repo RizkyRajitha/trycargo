@@ -1,0 +1,22 @@
+body {
+  overflow: scroll !important;
+}
+.tabs .tab a {
+  color: grey;
+  /*Custom Text Color*/
+}
+
+.tabs .tab a:hover {
+  color: black;
+  /*Custom Color On Hover*/
+}
+
+.tabs .tab a:focus.active {
+  color: rgb(24, 108, 204);
+  /*Custom Text Color While Active*/
+}
+
+.tabs .indicator {
+  background-color: rgb(24, 108, 204);
+  /*Custom Color Of Indicator*/
+}
