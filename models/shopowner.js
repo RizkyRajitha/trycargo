@@ -41,10 +41,16 @@ var shopownerSchema = new Schema({
       itemId: {
         type: String,
       },
+      itemName: {
+        type: String,
+      },
       unitprice: {
         type: String,
       },
-      date: {
+      addeddate: {
+        type: String,
+      },
+      updateddate: {
         type: String,
       },
       discription: {
