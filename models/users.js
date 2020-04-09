@@ -31,7 +31,26 @@ var userSchema = new Schema({
   },
   deliveryddress: {
     type: String,
-  }
+  },
+  orders: [
+    {
+      orderId: {
+        type: String,
+        unique: true,
+        required: true,
+        dropDups: true,
+      },
+      amount: {
+        type: String,
+      },
+      date: {
+        type: String,
+      },
+      orderStatus: {
+        type: String,
+      },
+    },
+  ],
 });
 
 const User = mongoose.model("User", userSchema);
