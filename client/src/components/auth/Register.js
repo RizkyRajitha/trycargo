@@ -30,9 +30,10 @@ class Register extends Component {
       lastname: this.state.lastname,
       email: this.state.email,
       phone: this.state.phone,
-      deliveryaddress: this.state.deliveryaddress,
+      // deliveryaddress: this.state.deliveryaddress,
       password: this.state.password,
     };
+    // console.log(newUser);
     this.props.registerUser(newUser, this.props.history);
   }
   render() {
@@ -96,7 +97,12 @@ class Register extends Component {
                   </div>
                   <div className="row">
                     <div className="input-field col s12">
-                      <input name="email" type="email" />
+                      <input
+                        value={this.state.email}
+                        onChange={this.onChange}
+                        name="email"
+                        type="email"
+                      />
                       <label htmlFor="email">Email</label>
                     </div>
                   </div>
@@ -134,7 +140,7 @@ class Register extends Component {
                           ? true
                           : false
                       }
-                      className="modal-close waves-effect waves-light btn light-blue darken-3"
+                      className="modal-close waves-effect waves-light btn grey darken-3"
                     >
                       Sign Up
                     </button>

@@ -1,7 +1,7 @@
 {
   "name": "fileup",
   "version": "1.0.0",
-  "description": "",
+  "description": "TryCargo is a platform build for small scale stores to create online ordering systems.",
   "main": "server.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -12,6 +12,7 @@
     "mongoose": "^5.7.1",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
+    "nodemon": "^2.0.3",
     "uuid": "^7.0.3"
   },
   "devDependencies": {},
@@ -21,5 +22,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RizkyRajitha/trycargo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RizkyRajitha/trycargo/issues"
+  },
+  "homepage": "https://github.com/RizkyRajitha/trycargo#readme"
 }

@@ -40,6 +40,8 @@ exports.signupcustomer = (req, res) => {
       if (err.code === 11000) {
         console.log("duplicate user");
         res.status(200).json({ msg: "dupuser" });
+      } else {
+        res.status(400).json(err);
       }
     });
 };

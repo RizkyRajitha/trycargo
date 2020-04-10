@@ -2,7 +2,7 @@ import React from "react";
 
 export default () => {
   return (
-    <div>
+    <footer classNAme="page-footer">
       <section className="section grey darken-3 white-text center">
         <div className="container">
           <div className="row">
@@ -12,6 +12,6 @@ export default () => {
           </div>
         </div>
       </section>
-    </div>
+    </footer>
   );
 };
