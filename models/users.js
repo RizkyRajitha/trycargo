@@ -32,22 +32,22 @@ var userSchema = new Schema({
   deliveryddress: {
     type: String,
   },
-  orders: [
-    {
-      orderId: {
-        type: String,
-      },
-      amount: {
-        type: String,
-      },
-      date: {
-        type: String,
-      },
-      orderStatus: {
-        type: String,
-      },
-    },
-  ],
+  // orders: [
+  //   {
+  //     orderId: {
+  //       type: String,
+  //     },
+  //     amount: {
+  //       type: String,
+  //     },
+  //     date: {
+  //       type: String,
+  //     },
+  //     orderStatus: {
+  //       type: String,
+  //     },
+  //   },
+  // ],
 });
 
 const User = mongoose.model("User", userSchema);

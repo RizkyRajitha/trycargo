@@ -24,7 +24,7 @@ var jwthelper = (req, res, next) => {
   const token = req.headers.authorization;
   //  req.body.token || req.query.token || req.headers['x-access-token']
   // decode token
-  console.log(token);
+  // console.log(token);
   if (token) {
     // verifies secret and checks exp
     jwt.verify(token, jwtsecret, function (err, decoded) {

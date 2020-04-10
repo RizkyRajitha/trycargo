@@ -15,6 +15,12 @@ var orderSchema = new Schema({
   date: {
     type: String,
   },
+  totalprice: {
+    type: String,
+  },
+  orderStatus: {
+    type: String,
+  },
   items: [
     {
       itemId: {
