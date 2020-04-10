@@ -30,7 +30,7 @@ class Register extends Component {
       lastname: this.state.lastname,
       email: this.state.email,
       phone: this.state.phone,
-      deliveryaddress: this.state.deliveryaddress,
+      // deliveryaddress: this.state.deliveryaddress,
       password: this.state.password,
     };
     // console.log(newUser);
@@ -140,7 +140,7 @@ class Register extends Component {
                           ? true
                           : false
                       }
-                      className="modal-close waves-effect waves-light btn light-blue darken-3"
+                      className="modal-close waves-effect waves-light btn grey darken-3"
                     >
                       Sign Up
                     </button>

@@ -12,11 +12,8 @@
     "mongoose": "^5.7.1",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
-<<<<<<< HEAD
-    "nodemon": "^2.0.3"
-=======
+    "nodemon": "^2.0.3",
     "uuid": "^7.0.3"
->>>>>>> 31a8f8f09bdf587388da64f2cc20323f792d4b16
   },
   "devDependencies": {},
   "scripts": {
