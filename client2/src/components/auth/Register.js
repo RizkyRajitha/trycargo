@@ -33,6 +33,7 @@ class Register extends Component {
       deliveryaddress: this.state.deliveryaddress,
       password: this.state.password,
     };
+    // console.log(newUser);
     this.props.registerUser(newUser, this.props.history);
   }
   render() {
@@ -96,7 +97,12 @@ class Register extends Component {
                   </div>
                   <div className="row">
                     <div className="input-field col s12">
-                      <input name="email" type="email" />
+                      <input
+                        value={this.state.email}
+                        onChange={this.onChange}
+                        name="email"
+                        type="email"
+                      />
                       <label htmlFor="email">Email</label>
                     </div>
                   </div>
