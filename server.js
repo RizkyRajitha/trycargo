@@ -19,7 +19,7 @@ const mongodbAPI = process.env.mongourl || require("./config/env").mongodbAPI; /
 app.use(require("morgan")("dev"));
 const jwtsecret = process.env.jwtsecret || require("./config/env").jwtsecret;
 
-var jwthelper = (req, res, next) => {
+var jwthelperowner = (req, res, next) => {
   console.log("helper .....");
   const token = req.headers.authorization;
   //  req.body.token || req.query.token || req.headers['x-access-token']
@@ -35,10 +35,53 @@ var jwthelper = (req, res, next) => {
           .json({ error: true, message: "unauthorized_access" });
       }
 
-      console.log("helper oK");
-      req.id = decoded.id;
+      if (decoded.type === "owner") {
+        console.log("helper oK");
+        req.id = decoded.id;
+        next();
+      } else {
+        console.log("wrong user");
+        return res
+          .status(401)
+          .json({ error: true, message: "unauthorized_access" });
+      }
+    });
+  } else {
+    // if there is no token
+    // return an error
+    return res.status(403).send({
+      error: true,
+      message: "no_token_provided.",
+    });
+  }
+};
 
-      next();
+var jwthelpercustomer = (req, res, next) => {
+  console.log("helper .....");
+  const token = req.headers.authorization;
+  //  req.body.token || req.query.token || req.headers['x-access-token']
+  // decode token
+  // console.log(token);
+  if (token) {
+    // verifies secret and checks exp
+    jwt.verify(token, jwtsecret, function (err, decoded) {
+      if (err) {
+        console.log(err);
+        return res
+          .status(401)
+          .json({ error: true, message: "unauthorized_access" });
+      }
+
+      if (decoded.type === "customer") {
+        console.log("helper oK");
+        req.id = decoded.id;
+        next();
+      } else {
+        console.log("wrong user");
+        return res
+          .status(401)
+          .json({ error: true, message: "unauthorized_access" });
+      }
     });
   } else {
     // if there is no token
@@ -53,7 +96,8 @@ var jwthelper = (req, res, next) => {
 app.use("/auth", require("./routes/auth/auth.router")); //dont add jwt middleware
 app.use("/reg", require("./routes/register/register.router")); //dont add jwt middleware
 
-app.use("/api", jwthelper, require("./routes/api/api.router"));
+app.use("/apicustomer", jwthelpercustomer, require("./routes/api/api.router"));
+app.use("/apiowner", jwthelperowner, require("./routes/api/api.router"));
 
 try {
   mongoose.connect(
