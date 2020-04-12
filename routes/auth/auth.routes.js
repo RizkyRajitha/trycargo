@@ -26,8 +26,12 @@ exports.logincustomer = (req, res) => {
         if (state) {
           var token = jwt.sign(
             {
-              email: doc.email,
               id: doc._id,
+              email: doc.email,
+              firstName: doc.firstName,
+              lastName: doc.lastName,
+              deliveryAddress: doc.deliveryAddress,
+              phone: doc.phone,
               type: "customer",
             },
             jwtsecret,
