@@ -59,6 +59,9 @@ var shopownerSchema = new Schema({
       quantity: {
         type: String,
       },
+      imgurl: {
+        type: String,
+      },
     },
   ],
 });
