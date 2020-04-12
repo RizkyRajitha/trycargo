@@ -22,6 +22,7 @@ exports.signupcustomer = (req, res) => {
     phone: datain.phone,
     firstName: datain.firstName,
     lastName: datain.lastName,
+    deliveryAddress: datain.deliveryAddress,
     hash: hash,
   });
 

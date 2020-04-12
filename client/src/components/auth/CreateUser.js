@@ -14,10 +14,10 @@ class CreateUser extends Component {
     const displayModal = (
       <div>
         <div id="signup" className="col s12 white">
-          <Register history={history} userType={this.props.userType} />
+          <Register userType={this.props.userType} history={history} />
         </div>
         <div id="login" className="col s12 white">
-          <Login userType={this.props.userType} />
+          <Login userType={this.props.userType} history={history} />
         </div>
       </div>
     );

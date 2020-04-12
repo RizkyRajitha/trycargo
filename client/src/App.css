@@ -1,11 +1,8 @@
-/* body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+.img-responsive {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
 }
-main {
-  flex: 1 0 auto;
-} */
 .tabs .tab a {
   color: grey;
   /*Custom Text Color*/

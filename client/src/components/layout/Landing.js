@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 //Import User Creation Modal
 import CreateUser from "../auth/CreateUser";
 
 //Import Image Files
 import groceries from "../../images/groceries.jpg";
-import medicine from "../../images/medicine.jfif";
+import medicine from "../../images/medicine.jpg";
 import delivary_man from "../../images/delivary.jpg";
 import supply_depot from "../../images/depot.jfif";
 import supply_depot2 from "../../images/store.jpg";
@@ -17,6 +18,12 @@ import stay_home from "../../images/stay_home.jpg";
 // import { connect } from "react-redux";
 
 class Landing extends Component {
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
   render() {
     const { history } = this.props;
     return (
@@ -25,7 +32,7 @@ class Landing extends Component {
         <section className="slider">
           <ul className="slides">
             <li>
-              <img src={groceries}></img>
+              <img className="img-responsive" src={groceries}></img>
               <div className="caption left-align text-black">
                 <h2>FOOD</h2>
                 <h5 className="light white-text text-darken-3 hide-on-small-only">
@@ -34,7 +41,7 @@ class Landing extends Component {
               </div>
             </li>
             <li>
-              <img src={medicine}></img>
+              <img className="img-responsive" src={medicine}></img>
               <div className="caption left-align">
                 <h2>MEDICINE</h2>
                 <h5 className="light white-text text-darken-3 hide-on-small-only">
@@ -43,7 +50,7 @@ class Landing extends Component {
               </div>
             </li>
             <li>
-              <img src={delivary_man}></img>
+              <img className="img-responsive" src={delivary_man}></img>
               <div className="caption left-align">
                 <h2>DELIVARY</h2>
                 <h5 className="light white-text text-darken-3 hide-on-small-only">
@@ -52,7 +59,7 @@ class Landing extends Component {
               </div>
             </li>
             <li>
-              <img src={supply_depot2}></img>
+              <img className="img-responsive" src={supply_depot2}></img>
               <div className="caption left-align">
                 <h2>SUPPLY</h2>
                 <h5 className="light white-text text-darken-3 hide-on-small-only">
@@ -62,7 +69,7 @@ class Landing extends Component {
               </div>
             </li>
             <li>
-              <img src={stay_home}></img>
+              <img className="img-responsive" src={stay_home}></img>
               <div className="caption left-align">
                 <h2>Stay Home,Stay Safe</h2>
                 <h5 className="light white-text text-darken-3 hide-on-small-only">
@@ -180,4 +187,12 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+Landing.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Landing);

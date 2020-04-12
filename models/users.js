@@ -29,7 +29,7 @@ var userSchema = new Schema({
   district: {
     type: String,
   },
-  deliveryddress: {
+  deliveryAddress: {
     type: String,
   },
   // orders: [

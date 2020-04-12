@@ -1,46 +1,111 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/authActions";
+import PropTypes from "prop-types";
 
-export default function Login({ userType }) {
-  return (
-    <div>
-      <div className="row">
-        <div className="container">
-          <div className="row">
-            <div className="col s12">
-              <div className="row"></div>
-              <div className="row center-align">
-                <h5>LOG IN</h5>
-                <h6>Create your account to place an order!</h6>
-              </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <input id="email" type="email" />
-                  <label htmlFor="email">Email</label>
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      password: "",
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
+  onChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    const userData = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+    this.props.loginUser(userData);
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="row">
+          <div className="container">
+            <div className="row">
+              <div className="col s12">
+                <div className="row"></div>
+                <div className="row center-align">
+                  <h5>LOG IN</h5>
+                  <h6>Log in to your account to place an order!</h6>
                 </div>
-              </div>
-              <div className="row">
-                <div className="input-field col s12">
-                  <input id="password" type="password" />
-                  <label htmlFor="password">Password</label>
-                  <div>
-                    <a href="#">
-                      <b>Forgot Password?</b>
-                    </a>
+                <form noValidate onSubmit={this.onSubmit}>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <input
+                        value={this.state.email}
+                        onChange={this.onChange}
+                        name="email"
+                        id="email"
+                        type="email"
+                      />
+                      <label htmlFor="email">Email</label>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="row center">
-                <a
-                  href=""
-                  className="modal-close waves-effect waves-light btn light-blue darken-3"
-                >
-                  Log in
-                </a>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <input
+                        value={this.state.password}
+                        name="password"
+                        onChange={this.onChange}
+                        id="password"
+                        type="password"
+                      />
+                      <label htmlFor="password">Password</label>
+                      <div>
+                        <a href="#">
+                          <b>Forgot Password?</b>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row center">
+                    <button
+                      type="submit"
+                      className="modal-close waves-effect waves-light btn grey darken-3"
+                    >
+                      Log in
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
+
+Login.propTypes = {
+  auth: PropTypes.object.isRequired,
+  loginUser: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);

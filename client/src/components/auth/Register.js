@@ -26,11 +26,11 @@ class Register extends Component {
   onSubmit(e) {
     e.preventDefault();
     const newUser = {
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
+      firstName: this.state.firstname,
+      lastName: this.state.lastname,
       email: this.state.email,
       phone: this.state.phone,
-      // deliveryaddress: this.state.deliveryaddress,
+      deliveryAddress: this.state.deliveryAddress,
       password: this.state.password,
     };
     // console.log(newUser);
@@ -74,12 +74,12 @@ class Register extends Component {
                   <div className="row">
                     <div className="input-field col s12">
                       <input
-                        value={this.state.deliveryaddress}
+                        value={this.state.deliveryAddress}
                         onChange={this.onChange}
-                        name="deliveryaddress"
+                        name="deliveryAddress"
                         type="text"
                       />
-                      <label htmlFor="deliveryaddress">
+                      <label htmlFor="deliveryAddress">
                         Address of drop point
                       </label>
                     </div>
@@ -140,7 +140,7 @@ class Register extends Component {
                           ? true
                           : false
                       }
-                      className="modal-close waves-effect waves-light btn grey darken-3"
+                      className="waves-effect waves-light btn grey darken-3"
                     >
                       Sign Up
                     </button>
