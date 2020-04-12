@@ -96,8 +96,12 @@ var jwthelpercustomer = (req, res, next) => {
 app.use("/auth", require("./routes/auth/auth.router")); //dont add jwt middleware
 app.use("/reg", require("./routes/register/register.router")); //dont add jwt middleware
 
-app.use("/apicustomer", jwthelpercustomer, require("./routes/api/api.router"));
-app.use("/apiowner", jwthelperowner, require("./routes/api/api.router"));
+app.use(
+  "/apicustomer",
+  jwthelpercustomer,
+  require("./routes/api/apicustomer.router")
+);
+app.use("/apiowner", jwthelperowner, require("./routes/api/apiowner.router"));
 
 try {
   mongoose.connect(
