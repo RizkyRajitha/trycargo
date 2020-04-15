@@ -6,7 +6,6 @@ import Moment from "react-moment";
 import { addItem } from "../../../actions/stockActions";
 
 import buisnesslogo from "../../../images/buisnesslogo.jpg";
-import try_cargo from "../../../images/banana.jpg";
 
 class SupplierDashboard extends Component {
   constructor(props) {
@@ -40,7 +39,6 @@ class SupplierDashboard extends Component {
     formdata.append("description", this.state.description);
     formdata.append("quantity", this.state.quantity);
     formdata.append("resobj", this.state.file);
-    // console.log(formdata);
     this.props.addItem(formdata, this.props.history);
   }
   displayOrders(items) {}
@@ -151,9 +149,9 @@ class SupplierDashboard extends Component {
                         <div className="col s12">
                           <a
                             href="#addItem"
-                            className="btn btn-small waves-effect waves-light teal modal-trigger"
+                            className="btn-floating btn-small waves-effect waves-light teal modal-trigger"
                           >
-                            <i className="material-icons left">add</i>New Item
+                            <i className="material-icons">add</i>
                           </a>
                           <div id="addItem" className="modal">
                             <div className="modal-content">
@@ -231,7 +229,7 @@ class SupplierDashboard extends Component {
                                 </div>
                               </form>
                             </div>
-                            <div className="modal-footer">
+                            <div className="modal-footer center-align">
                               <a
                                 onClick={this.addNewItem}
                                 className="modal-close btn waves-effect waves-light blue darken-3"
