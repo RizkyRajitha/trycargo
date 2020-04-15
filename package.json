@@ -4,6 +4,7 @@
   "description": "TryCargo is a platform build for small scale stores to create online ordering systems.",
   "main": "server.js",
   "dependencies": {
+    "@sendgrid/mail": "^7.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.21.0",

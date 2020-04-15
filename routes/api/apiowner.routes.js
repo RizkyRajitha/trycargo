@@ -33,7 +33,7 @@ exports.ownerdashboard = (req, res) => {
       Order.findOne({ ownerId: req.id })
         .then((doc2) => {
           temppayload = {
-            // businessname: doc.businessname,
+            // buisnessname: doc.buisnessname,
             // username: doc.username,
             items: doc.items,
             orders: doc2,
@@ -51,6 +51,7 @@ exports.ownerdashboard = (req, res) => {
     });
 };
 
+<<<<<<< HEAD:routes/api/api.routes.js
 exports.customerdashboard = (req, res) => {
   console.log("customerdahsboard");
   var datain = req.body;
@@ -111,6 +112,8 @@ exports.neworder = (req, res) => {
     });
 };
 
+=======
+>>>>>>> 1f0a0f112d2f876a1b84a1aa69fc02a6da1a4812:routes/api/apiowner.routes.js
 exports.addnewitem = (req, res) => {
   console.log("new order");
   var datain = req.body;
@@ -153,6 +156,42 @@ exports.addnewitem = (req, res) => {
         });
     })
     .catch((err) => console.log(err));
+};
+
+exports.editowner = (req, res) => {
+  console.log("edit owner");
+  var datain = req.body;
+  console.log(datain);
+  console.log(req.file);
+
+  ShopOwner.findOneAndUpdate(
+    { _id: req.id },
+    {
+      $set: {
+        buisnessname: datain.buisnessname,
+        aboutus: datain.aboutus,
+        buisnessphone: datain.buisnessphone,
+        buisnessaddress: datain.buisnessaddress,
+        buisnessdistrict: datain.buisnessdistrict,
+        workinghours: datain.workinghours,
+      },
+    }
+  )
+    .then((doc) => {
+      console.log(doc);
+
+      res.status(200).json({ msg: "success" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("err");
+    });
+};
+
+exports.acceptorder = (req, res) => {
+  console.log("accept order");
+  var datain = req.body;
+  console.log(datain);
 };
 
 const fileupcloud = function (filename, path) {

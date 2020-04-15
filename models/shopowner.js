@@ -10,6 +10,12 @@ var shopownerSchema = new Schema({
     dropDups: true,
   },
   buisnessname: {
+<<<<<<< HEAD
+=======
+    type: String,
+  },
+  aboutus: {
+>>>>>>> 1f0a0f112d2f876a1b84a1aa69fc02a6da1a4812
     type: String,
   },
   username: {

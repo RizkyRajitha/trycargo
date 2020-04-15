@@ -15,6 +15,9 @@ var orderSchema = new Schema({
   date: {
     type: String,
   },
+  buisnessname: {
+    type: String,
+  },
   totalprice: {
     type: String,
   },
@@ -30,6 +33,9 @@ var orderSchema = new Schema({
         type: String,
       },
       quantity: {
+        type: String,
+      },
+      itemName: {
         type: String,
       },
     },

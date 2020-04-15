@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-const apiroutes = require("./api.routes");
+const apiroutes = require("./apiowner.routes");
 
 const multer = require("multer");
 var storage = multer.diskStorage({
@@ -17,7 +17,7 @@ var storage = multer.diskStorage({
 const fileup = multer({ storage: storage });
 
 router.get("/ownerdashboard", apiroutes.ownerdashboard);
-router.get("/customerdashboard", apiroutes.customerdashboard);
 router.post("/addnewitem", fileup.single("resobj"), apiroutes.addnewitem);
+router.post("/owneredit", apiroutes.editowner);
 
 module.exports = router;
