@@ -15,7 +15,7 @@ var orderSchema = new Schema({
   date: {
     type: String,
   },
-  businessname: {
+  buisnessname: {
     type: String,
   },
   totalprice: {

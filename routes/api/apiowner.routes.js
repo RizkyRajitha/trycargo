@@ -33,7 +33,7 @@ exports.ownerdashboard = (req, res) => {
       Order.findOne({ ownerId: req.id })
         .then((doc2) => {
           temppayload = {
-            // businessname: doc.businessname,
+            // buisnessname: doc.buisnessname,
             // username: doc.username,
             items: doc.items,
             orders: doc2,
@@ -105,11 +105,11 @@ exports.editowner = (req, res) => {
     { _id: req.id },
     {
       $set: {
-        businessname: datain.businessname,
+        buisnessname: datain.buisnessname,
         aboutus: datain.aboutus,
-        businessphone: datain.businessphone,
-        businessaddress: datain.businessaddress,
-        businessdistrict: datain.businessdistrict,
+        buisnessphone: datain.buisnessphone,
+        buisnessaddress: datain.buisnessaddress,
+        buisnessdistrict: datain.buisnessdistrict,
         workinghours: datain.workinghours,
       },
     }

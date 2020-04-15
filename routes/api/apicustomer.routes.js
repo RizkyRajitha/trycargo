@@ -66,7 +66,7 @@ exports.neworder = (req, res) => {
         customerId: req.id,
         orderId: orderId,
         date: new Date().toISOString(),
-        businessname: datain.businessname,
+        buisnessname: datain.buisnessname,
         totalprice: datain.totalprice,
         orderStatus: "pending",
         items: datain.items,

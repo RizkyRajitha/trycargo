@@ -9,7 +9,7 @@ var shopownerSchema = new Schema({
     required: true,
     dropDups: true,
   },
-  businessname: {
+  buisnessname: {
     type: String,
   },
   aboutus: {
@@ -27,13 +27,13 @@ var shopownerSchema = new Schema({
   tempotp: {
     type: String,
   },
-  businessphone: {
+  buisnessphone: {
     type: String,
   },
-  businessaddress: {
+  buisnessaddress: {
     type: String,
   },
-  businessdistrict: {
+  buisnessdistrict: {
     type: String,
   },
   workinghours: {
