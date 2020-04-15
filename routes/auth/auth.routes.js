@@ -5,7 +5,10 @@ const jwtsecret =
 const sendgridkey =
   process.env.sendgridkey || require("../../config/env").sendgridkey;
 
+<<<<<<< HEAD
+=======
 const sgMail = require("@sendgrid/mail");
+>>>>>>> 1f0a0f112d2f876a1b84a1aa69fc02a6da1a4812
 const jwt = require("jsonwebtoken");
 const User = require("../../models/users");
 const ShopOwner = require("../../models/shopowner");
@@ -66,7 +69,13 @@ exports.loginshopowner = (req, res) => {
       if (state) {
         var token = jwt.sign(
           {
+            username: doc.username,
+            buisnessname: doc.buisnessname,
+            buisnessphone: doc.buisnessphone,
+            buisnessaddress: doc.buisnessaddress,
+            workinghours: doc.workinghours,
             email: doc.email,
+            items: doc.items,
             id: doc._id,
             type: "owner",
           },

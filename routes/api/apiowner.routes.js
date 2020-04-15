@@ -51,6 +51,69 @@ exports.ownerdashboard = (req, res) => {
     });
 };
 
+<<<<<<< HEAD:routes/api/api.routes.js
+exports.customerdashboard = (req, res) => {
+  console.log("customerdahsboard");
+  var datain = req.body;
+  console.log(datain);
+
+  User.findOne({ _id: req.id })
+    .then((doc) => {
+      console.log(doc);
+
+      Order.findOne({ customerId: req.id })
+        .then((doc2) => {
+          temppayload = {
+            name: doc.firstName + " " + doc.lastName,
+            district: doc.district,
+            orders: doc2,
+          };
+
+          res.status(200).json({ msg: "success", data: temppayload });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("err");
+    });
+};
+
+exports.neworder = (req, res) => {
+  console.log("new order");
+  var datain = req.body;
+  console.log(datain);
+
+  User.findOne({ _id: req.id })
+    .then((doc) => {
+      console.log(doc);
+
+      var neworder = new Order({});
+
+      Order.findOne({ customerId: req.id })
+        .then((doc2) => {
+          temppayload = {
+            name: doc.firstName + " " + doc.lastName,
+            district: doc.district,
+            orders: doc2,
+          };
+
+          res.status(200).json({ msg: "success", data: temppayload });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("err");
+    });
+};
+
+=======
+>>>>>>> 1f0a0f112d2f876a1b84a1aa69fc02a6da1a4812:routes/api/apiowner.routes.js
 exports.addnewitem = (req, res) => {
   console.log("new order");
   var datain = req.body;

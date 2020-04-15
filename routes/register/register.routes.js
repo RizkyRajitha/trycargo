@@ -60,12 +60,12 @@ exports.signupowner = (req, res) => {
   var newuser = new ShopOwner({
     email: datain.email,
     phone: datain.phone,
-    businessname: datain.businessname,
+    buisnessname: datain.buisnessname,
     username: datain.username,
     hash: hash,
-    businessphone: datain.businessphone,
-    businessaddress: datain.businessaddress,
-    businessdistrict: datain.businessdistrict,
+    buisnessphone: datain.buisnessphone,
+    buisnessaddress: datain.buisnessaddress,
+    buisnessdistrict: datain.buisnessdistrict,
   });
 
   newuser

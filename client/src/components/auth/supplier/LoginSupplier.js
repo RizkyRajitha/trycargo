@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
+import { loginUser } from "../../../actions/authActions";
 import PropTypes from "prop-types";
 
-class Login extends Component {
+class LoginSupplier extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,12 +16,12 @@ class Login extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/dashboard/supplier");
     }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/dashboard/supplier");
     }
   }
 
@@ -36,7 +36,7 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    this.props.loginUser(userData);
+    this.props.loginUser(userData, "supplier");
   }
 
   render() {
@@ -45,7 +45,7 @@ class Login extends Component {
         <div className="row">
           <div className="container">
             <div className="row">
-              <div className="col s12">
+              <div className="col s10 offset-s1">
                 <div className="row"></div>
                 <div className="row center-align">
                   <h5>LOG IN</h5>
@@ -99,7 +99,7 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+LoginSupplier.propTypes = {
   auth: PropTypes.object.isRequired,
   loginUser: PropTypes.func.isRequired,
 };
@@ -108,4 +108,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser })(LoginSupplier);
