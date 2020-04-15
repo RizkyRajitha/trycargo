@@ -55,19 +55,32 @@ exports.neworder = (req, res) => {
   var datain = req.body;
   console.log(datain);
 
+  const orderId = uuid();
+
   User.findOne({ _id: req.id })
     .then((doc) => {
       console.log(doc);
 
-      var neworder = new Order({});
+      var neworder = new Order({
+        ownerId: datain.ownerId,
+        customerId: req.id,
+        orderId: orderId,
+        date: new Date().toISOString(),
+        businessname: datain.businessname,
+        totalprice: datain.totalprice,
+        orderStatus: "pending",
+        items: datain.items,
+      });
 
-      Order.findOne({ customerId: req.id })
+      neworder
+        .save()
         .then((doc2) => {
-          temppayload = {
-            name: doc.firstName + " " + doc.lastName,
-            district: doc.district,
-            orders: doc2,
-          };
+          console.log(doc2);
+          // temppayload = {
+          //   name: doc.firstName + " " + doc.lastName,
+          //   district: doc.district,
+          //   orders: doc2,
+          // };
 
           res.status(200).json({ msg: "success", data: temppayload });
         })

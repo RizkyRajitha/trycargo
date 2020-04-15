@@ -18,5 +18,6 @@ const fileup = multer({ storage: storage });
 
 router.get("/ownerdashboard", apiroutes.ownerdashboard);
 router.post("/addnewitem", fileup.single("resobj"), apiroutes.addnewitem);
+router.post("/owneredit", apiroutes.editowner);
 
 module.exports = router;

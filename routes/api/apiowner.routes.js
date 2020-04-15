@@ -51,7 +51,6 @@ exports.ownerdashboard = (req, res) => {
     });
 };
 
-
 exports.addnewitem = (req, res) => {
   console.log("new order");
   var datain = req.body;
@@ -94,6 +93,42 @@ exports.addnewitem = (req, res) => {
         });
     })
     .catch((err) => console.log(err));
+};
+
+exports.editowner = (req, res) => {
+  console.log("edit owner");
+  var datain = req.body;
+  console.log(datain);
+  console.log(req.file);
+
+  ShopOwner.findOneAndUpdate(
+    { _id: req.id },
+    {
+      $set: {
+        businessname: datain.businessname,
+        aboutus: datain.aboutus,
+        businessphone: datain.businessphone,
+        businessaddress: datain.businessaddress,
+        businessdistrict: datain.businessdistrict,
+        workinghours: datain.workinghours,
+      },
+    }
+  )
+    .then((doc) => {
+      console.log(doc);
+
+      res.status(200).json({ msg: "success" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("err");
+    });
+};
+
+exports.acceptorder = (req, res) => {
+  console.log("accept order");
+  var datain = req.body;
+  console.log(datain);
 };
 
 const fileupcloud = function (filename, path) {

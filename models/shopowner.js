@@ -12,6 +12,9 @@ var shopownerSchema = new Schema({
   businessname: {
     type: String,
   },
+  aboutus: {
+    type: String,
+  },
   username: {
     type: String,
     unique: true,
