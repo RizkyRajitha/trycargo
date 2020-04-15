@@ -52,7 +52,7 @@ exports.ownerdashboard = (req, res) => {
 };
 
 exports.customerdashboard = (req, res) => {
-  console.log("ownerdahsboard");
+  console.log("customerdahsboard");
   var datain = req.body;
   console.log(datain);
 
