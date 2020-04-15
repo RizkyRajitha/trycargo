@@ -302,3 +302,81 @@ exports.resetpasswordcustomer = (req, res) => {
   console.log(newpassword);
   // res.send("hahahaha  " + id);
 };
+
+exports.changePassuser = (req, res) => {
+  newpassword = req.body.password;
+
+  oldpassword = req.body.oldpassword;
+
+  User.findOne({ _id: req.id })
+    .then((result) => {
+      console.log("found " + result.email);
+
+      if (bcrypt.compareSync(oldpassword, result.hash)) {
+        console.log("password correct");
+
+        var salt = bcrypt.genSaltSync(saltRounds);
+        var hash = bcrypt.hashSync(newpassword, salt);
+
+        result.hash = hash;
+        //result.hash = newpassword;
+        result
+          .save()
+          .then((doc) => {
+            console.log("password changed succesfully");
+            res.json({ msg: "passchanged" });
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).send(err);
+          });
+      } else {
+        console.log("old pass incorrect");
+        res.json({ msg: "oldpassserror" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send("error");
+    });
+};
+
+exports.changePassowner = (req, res) => {
+  console.log(req.id);
+
+  newpassword = req.body.password;
+
+  oldpassword = req.body.oldpassword;
+
+  ShopOwner.findOne({ _id: req.id })
+    .then((result) => {
+      console.log("found " + result.email);
+
+      if (bcrypt.compareSync(oldpassword, result.hash)) {
+        console.log("password correct");
+
+        var salt = bcrypt.genSaltSync(saltRounds);
+        var hash = bcrypt.hashSync(newpassword, salt);
+
+        result.hash = hash;
+        //result.hash = newpassword;
+        result
+          .save()
+          .then((doc) => {
+            console.log("password changed succesfully");
+            res.json({ msg: "passchanged" });
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).send(err);
+          });
+      } else {
+        console.log("old pass incorrect");
+        res.json({ msg: "oldpassserror" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send("error");
+    });
+};
