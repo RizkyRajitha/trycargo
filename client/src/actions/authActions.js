@@ -4,35 +4,65 @@ import jwt_decode from "jwt-decode";
 import { SET_CURRENT_USER, GET_ERRORS } from "./types";
 
 //Action  for register
-export const registerUser = (userData, history) => (dispatch) => {
-  console.log(userData, history);
-  axios
-    .post("/reg/signupcustomer", userData)
-    .then((res) => {
-      history.push("/");
-    })
-    .catch((err) => console.log(err));
+export const registerUser = (userData, history, userType) => (dispatch) => {
+  if (userType == "customer") {
+    axios
+      .post("/reg/signupcustomer", userData)
+      .then((res) => {
+        history.push("/authorization/customer/login");
+      })
+      .catch((err) => console.log(err));
+  }
+  if (userType == "supplier") {
+    axios
+      .post("/reg/signupowner", userData)
+      .then((res) => {
+        history.push("/authorization/supplier/login");
+      })
+      .catch((err) => console.log(err));
+  }
 };
 
 //Action for login
-export const loginUser = (userData) => (dispatch) => {
-  axios
-    .post("/auth/logincustomer", userData)
-    .then((res) => {
-      //Save token to localstorage
-      const { token } = res.data;
-      //Set token to localstorage
-      localStorage.setItem("jwtToken", token);
-      //Set token to Authorization header
-      setAuthToken(token);
-      //Decode token to get user data
-      const decoded = jwt_decode(token);
-      //Set current user
-      dispatch(setCurrentUser(decoded));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+export const loginUser = (userData, userType) => (dispatch) => {
+  if (userType == "customer") {
+    axios
+      .post("/auth/logincustomer", userData)
+      .then((res) => {
+        //Save token to localstorage
+        const { token } = res.data;
+        //Set token to localstorage
+        localStorage.setItem("jwtToken", token);
+        //Set token to Authorization header
+        setAuthToken(token);
+        //Decode token to get user data
+        const decoded = jwt_decode(token);
+        //Set current user
+        dispatch(setCurrentUser(decoded));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  if (userType == "supplier") {
+    axios
+      .post("/auth/loginshopowner", userData)
+      .then((res) => {
+        //Save token to localstorage
+        const { token } = res.data;
+        //Set token to localstorage
+        localStorage.setItem("jwtToken", token);
+        //Set token to Authorization header
+        setAuthToken(token);
+        //Decode token to get user data
+        const decoded = jwt_decode(token);
+        //Set current user
+        dispatch(setCurrentUser(decoded));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 };
 
 //Action for logout

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 //Import User Creation Modal
-import CreateUser from "../auth/CreateUser";
+import CreateUser from "../auth/customer/CreateUser";
 
 //Import Image Files
 import groceries from "../../images/groceries.jpg";
@@ -20,7 +20,12 @@ import stay_home from "../../images/stay_home.jpg";
 class Landing extends Component {
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      if (this.props.auth.user.type == "customer") {
+        this.props.history.push("/dashboard/customer");
+      }
+      if (this.props.auth.user.type == "owner") {
+        this.props.history.push("/dashboard/supplier");
+      }
     }
   }
 
@@ -105,13 +110,13 @@ class Landing extends Component {
                         </i>
                       </div>
                       <div>
-                        <a
+                        <Link
                           style={{ height: "auto" }}
-                          className="btn btn-medium teal lighten-2 waves-effect waves-light modal-trigger"
-                          href="#modalCustomer"
+                          className="btn btn-medium teal lighten-2 waves-effect waves-light"
+                          to="/authorization/customer"
                         >
                           <h6 className="center">Get Supplies</h6>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -162,24 +167,19 @@ class Landing extends Component {
                         </i>
                       </div>
                       <div>
-                        <a
+                        <Link
                           style={{ height: "auto" }}
                           className="btn btn-medium red lighten-2 waves-effect waves-light"
+                          to="/authorization/supplier"
                         >
                           <h6 className="center">Create Store</h6>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-        {/*Modals Section*/}
-        <section>
-          <div className="modal s12" id="modalCustomer">
-            <CreateUser history={history} userType="customer" />
           </div>
         </section>
       </div>

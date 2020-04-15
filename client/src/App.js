@@ -16,7 +16,18 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
+
 import CustomerDashboard from "./components/dashboard/customer/CustomerDashboard";
+import SupplierDashboard from "./components/dashboard/supplier/SupplierDashboard";
+
+import CreateCustomer from "./components/auth/customer/CreateUser";
+import CreateSupplier from "./components/auth/supplier/CreateUser";
+
+import LoginCustomer from "./components/auth/customer/LoginCustomer";
+import LoginSupplier from "./components/auth/supplier/LoginSupplier";
+
+import RegisterCustomer from "./components/auth/customer/RegisterCustomer";
+import RegisterSupplier from "./components/auth/supplier/RegisterSupplier";
 
 import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
@@ -30,7 +41,7 @@ if (localStorage.jwtToken) {
   //Set user
   store.dispatch(setCurrentUser(decoded));
   //Check for expired token
-  const currentTime = Date.now / 1000;
+  const currentTime = Date.now / (1000 * 60);
   if (decoded.exp < currentTime) {
     //Logout the User
     store.dispatch(logoutUser());
@@ -46,12 +57,49 @@ function App() {
         <div className="App">
           <Navbar />
           <Route exact path="/" component={Landing} />
+          <Route
+            exact
+            path="/authorization/customer"
+            component={CreateCustomer}
+          />
+          <Route
+            exact
+            path="/authorization/customer/login"
+            component={LoginCustomer}
+          />
+          <Route
+            exact
+            path="/authorization/customer/register"
+            component={RegisterCustomer}
+          />
+          <Route
+            exact
+            path="/authorization/supplier"
+            component={CreateSupplier}
+          />
+          <Route
+            exact
+            path="/authorization/supplier/login"
+            component={LoginSupplier}
+          />
+          <Route
+            exact
+            path="/authorization/supplier/register"
+            component={RegisterSupplier}
+          />
           <div className="container">
             <Switch>
               <PrivateRoute
                 exact
-                path="/dashboard"
+                path="/dashboard/customer"
                 component={CustomerDashboard}
+              />
+            </Switch>
+            <Switch>
+              <PrivateRoute
+                exact
+                path="/dashboard/supplier"
+                component={SupplierDashboard}
               />
             </Switch>
           </div>

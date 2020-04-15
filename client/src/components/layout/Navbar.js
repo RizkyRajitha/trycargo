@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import logo from "../../images/logo.png";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+import { logoutUser } from "../../actions/authActions";
 
 class Navbar extends Component {
   render() {
+    const { isAuthenticated } = this.props.auth;
     return (
       <div>
         <div className="navbar-fixed">
@@ -30,16 +35,17 @@ class Navbar extends Component {
                       Search
                     </a>
                   </li>
-                  <li>
-                    <a href="#signup" className="white-text">
-                      Sign Up
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#login" className="white-text">
-                      Login
-                    </a>
-                  </li>
+                  {isAuthenticated && (
+                    <li>
+                      <a
+                        href="/"
+                        onClick={this.props.logoutUser}
+                        className="white-text"
+                      >
+                        Logout
+                      </a>
+                    </li>
+                  )}
                   <li>
                     <a href="#about" className="white-text">
                       About
@@ -62,12 +68,19 @@ class Navbar extends Component {
           <li>
             <a href="#search">Search</a>
           </li>
-          <li>
-            <a href="#signup">Signup</a>
-          </li>
-          <li>
-            <a href="#login">Login</a>
-          </li>
+
+          {isAuthenticated && (
+            <li>
+              <a
+                href="/"
+                onClick={this.props.logoutUser}
+                className="white-text"
+              >
+                Logout
+              </a>
+            </li>
+          )}
+
           <li>
             <a href="#about">About</a>
           </li>
@@ -80,4 +93,13 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+Navbar.propTypes = {
+  auth: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logoutUser })(Navbar);

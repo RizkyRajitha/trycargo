@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { registerUser } from "../../actions/authActions";
+import { registerUser } from "../../../actions/authActions";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 
-class Register extends Component {
+class RegisterCustomer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,18 +34,20 @@ class Register extends Component {
       password: this.state.password,
     };
     // console.log(newUser);
-    this.props.registerUser(newUser, this.props.history);
+    this.props.registerUser(newUser, this.props.history, "customer");
   }
   render() {
     return (
-      <div>
+      <div className="center-align">
         <div className="row">
           <div className="container">
             <div className="row">
-              <div className="col s12">
+              <div className="col s10 offset-s1">
                 <div className="row"></div>
                 <div className="row center-align">
-                  <h5>SIGN UP</h5>
+                  <div className="card-title">
+                    <h5>SIGN UP</h5>
+                  </div>
                   <h6>Create your account to place an order!</h6>
                 </div>
                 <form noValidate onSubmit={this.onSubmit}>
@@ -155,7 +157,7 @@ class Register extends Component {
   }
 }
 
-Register.propTypes = {
+RegisterCustomer.propTypes = {
   registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
 };
@@ -164,4 +166,6 @@ const mapStatetoProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStatetoProps, { registerUser })(withRouter(Register));
+export default connect(mapStatetoProps, { registerUser })(
+  withRouter(RegisterCustomer)
+);

@@ -84,7 +84,7 @@ class CustomerDashboard extends Component {
             <div id="supplies">
               <h4>Create your Order</h4>
               <div className="container center">
-                <table class="highlight responsive-table">
+                <table className="highlight responsive-table">
                   <thead>
                     <tr>
                       <th>Item</th>
@@ -111,7 +111,7 @@ class CustomerDashboard extends Component {
             <div id="orders">
               <h4>Your Orders</h4>
               <div className="container center">
-                <table class="highlight responsive-table">
+                <table className="highlight responsive-table">
                   <thead>
                     <tr>
                       <th>Date of the Order</th>
