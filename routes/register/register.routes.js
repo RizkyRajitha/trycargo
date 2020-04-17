@@ -102,3 +102,21 @@ exports.chechusername = (req, res) => {
       console.log(err);
     });
 };
+
+exports.shopdashboard = (req, res) => {
+  console.log(" shop dashbaord ");
+  var datain = req.body;
+  console.log(datain);
+
+  // const orderId = uuid();
+
+  ShopOwner.findOne({ username: datain.username })
+    .then((doc) => {
+      console.log(doc);
+      res.status(200).json(doc.items);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("err");
+    });
+};
