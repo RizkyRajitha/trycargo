@@ -29,6 +29,9 @@ import LoginSupplier from "./components/auth/supplier/LoginSupplier";
 import RegisterCustomer from "./components/auth/customer/RegisterCustomer";
 import RegisterSupplier from "./components/auth/supplier/RegisterSupplier";
 
+import ResetPassword from "./components/auth/customer/ResetPassword";
+import NewPassword from "./components/auth/customer/NewPassword";
+
 import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
 
@@ -65,7 +68,7 @@ function App() {
           <Route
             exact
             path="/authorization/customer/login"
-            component={LoginCustomer}
+            render={(props) => <LoginCustomer {...props} />}
           />
           <Route
             exact
@@ -87,6 +90,12 @@ function App() {
             path="/authorization/supplier/register"
             component={RegisterSupplier}
           />
+          <Route
+            exact
+            path="/authorization/resetpassword"
+            component={ResetPassword}
+          />
+          <Route exact path="/resetpassword/:token" component={NewPassword} />
           <div className="container">
             <Switch>
               <PrivateRoute

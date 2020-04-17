@@ -1,11 +1,13 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
+
 import { SET_CURRENT_USER, GET_ERRORS } from "./types";
 
 //Action  for register
 export const registerUser = (userData, history, userType) => (dispatch) => {
-  if (userType == "customer") {
+  if (userType === "customer") {
     axios
       .post("/reg/signupcustomer", userData)
       .then((res) => {
@@ -13,7 +15,7 @@ export const registerUser = (userData, history, userType) => (dispatch) => {
       })
       .catch((err) => console.log(err));
   }
-  if (userType == "supplier") {
+  if (userType === "supplier") {
     axios
       .post("/reg/signupowner", userData)
       .then((res) => {
@@ -25,7 +27,7 @@ export const registerUser = (userData, history, userType) => (dispatch) => {
 
 //Action for login
 export const loginUser = (userData, userType) => (dispatch) => {
-  if (userType == "customer") {
+  if (userType === "customer") {
     axios
       .post("/auth/logincustomer", userData)
       .then((res) => {
@@ -44,7 +46,7 @@ export const loginUser = (userData, userType) => (dispatch) => {
         console.log(err);
       });
   }
-  if (userType == "supplier") {
+  if (userType === "supplier") {
     axios
       .post("/auth/loginshopowner", userData)
       .then((res) => {
@@ -63,6 +65,26 @@ export const loginUser = (userData, userType) => (dispatch) => {
         console.log(err);
       });
   }
+};
+
+//Action for reset password
+export const resetPassword = (email) => (dispatch) => {
+  console.log(email);
+  axios
+    .post("/auth/forgotpasswordcustomer", { email })
+    .then((res) => {
+      Swal.fire("Check your mail to reset password");
+    })
+    .catch((err) => console.log(err));
+};
+
+export const newPassword = (data) => (dispatch) => {
+  axios
+    .post("/auth/resetpasswordcustomer", data)
+    .then((res) => {
+      Swal.fire("Log in with your new password");
+    })
+    .catch((err) => console.log(err));
 };
 
 //Action for logout

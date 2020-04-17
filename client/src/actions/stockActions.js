@@ -1,12 +1,14 @@
 import axios from "axios";
-import jwt_decode from "jwt-decode";
-import { SET_CURRENT_USER, GET_ERRORS } from "./types";
+import Swal from "sweetalert2";
+import { SET_NEW_ITEM } from "./types";
 
 export const addItem = (itemData, history) => (dispatch) => {
   axios
     .post("/apiowner/addnewitem", itemData)
     .then((res) => {
-      console.log("Item addded successfully");
+      Swal.fire("Success", "Item has been added to your store", "success");
+      console.log(res);
+      dispatch({ type: SET_NEW_ITEM, payload: res.data.data });
     })
     .catch((err) => console.log(err));
 };

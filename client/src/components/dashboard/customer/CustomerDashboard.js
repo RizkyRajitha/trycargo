@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
 
-import try_cargo from "../../../images/banana.jpg";
+import profileImage from "../../../images/background.jpg";
 
 class CustomerDashboard extends Component {
   displaySupplies(items) {
@@ -11,7 +12,6 @@ class CustomerDashboard extends Component {
         <td>
           <img
             style={{ width: "150px", height: "150px", objectFit: "cover" }}
-            src={try_cargo}
           ></img>
         </td>
         <td>{item.name}</td>
@@ -49,88 +49,94 @@ class CustomerDashboard extends Component {
       deliveryAddress,
     } = this.props.auth.user;
     return (
-      <div>
+      <div style={{ height: "83vh" }}>
         <br></br>
-        <div className="row">
-          <div className="container left">
-            <div className="row">
-              <div className="col s12">
-                <h4>
-                  Welcome{" "}
-                  <span className="blue-text">
-                    {firstName + " " + lastName}
-                  </span>
-                </h4>
-              </div>
-            </div>
-          </div>
+        <div className="row left-align">
           <br></br>
-          <div class="contatiner">
+          <div style={{ width: "100%" }}>
             <div className="row">
               <div className="col s12">
-                <ul className="tabs">
-                  <li className="tab col s4">
-                    <a href="#supplies">Supplies</a>
-                  </li>
-                  <li className="tab col s4">
-                    <a href="#orders">Orders</a>
-                  </li>
-                  <li className="tab col s4">
-                    <a href="#support">Support</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div id="supplies">
-              <h4>Create your Order</h4>
-              <div className="container center">
-                <table className="highlight responsive-table">
-                  <thead>
-                    <tr>
-                      <th>Item</th>
-                      <th>Description</th>
-                      <th>Price</th>
-                      <th>Supplier</th>
-                      <th>Quantity</th>
-                      <th>Add to Cart</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.displaySupplies([
-                      { name: "mango", price: "20", supplier: "keels" },
-                      { name: "mango", price: "20", supplier: "keels" },
-                      { name: "mango", price: "20", supplier: "keels" },
-                      { name: "mango", price: "20", supplier: "keels" },
-                      { name: "mango", price: "20", supplier: "keels" },
-                      { name: "mango", price: "20", supplier: "keels" },
-                    ])}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div id="orders">
-              <h4>Your Orders</h4>
-              <div className="container center">
-                <table className="highlight responsive-table">
-                  <thead>
-                    <tr>
-                      <th>Date of the Order</th>
-                      <th>Date of Arrival</th>
-                      <th>Description</th>
-                      <th>Net Cost</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.displayOrders([
-                      {
-                        dateOfOrder: "2020/04/12",
-                        description: "description goes here",
-                        dateOfArrival: "2020/04/15",
-                        netCost: "1500",
-                      },
-                    ])}
-                  </tbody>
-                </table>
+                <div className="row">
+                  <div className="col s12 m3">
+                    <div className="card grey darken-3">
+                      <div className="card-image">
+                        <img src={profileImage}></img>
+                      </div>
+                      <div className="card-content left-align">
+                        <div className="card-title blue-text">
+                          <h5>
+                            {firstName} {lastName}
+                          </h5>
+                        </div>
+                        <ul className="grey-text">
+                          <li>Email : {email}</li>
+                          <br></br>
+                          <li>Telephone : {phone}</li>
+                          <br></br>
+                          <li>Address : {deliveryAddress}</li>
+                        </ul>
+                      </div>
+                      <div className="card-action center-align">
+                        <a
+                          href="#"
+                          onClick={() => {
+                            Swal.fire(
+                              "Success",
+                              "Item has been added to your store",
+                              "success"
+                            );
+                          }}
+                          className="btn btn-medium waves-effect waves-light blue darken-3"
+                        >
+                          Edit Profile
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col s12 m9">
+                    <div className="container">
+                      <div className="row">
+                        <div
+                          className="container card grey darken-3 white-text center-align"
+                          style={{ width: "100%" }}
+                        >
+                          <h5
+                            style={{
+                              paddingTop: "10px",
+                              paddingBottom: "10px",
+                            }}
+                          >
+                            Your Current Order
+                          </h5>
+                        </div>
+                        <table className="highlight responsive-table">
+                          <thead>
+                            <tr>
+                              <th>Item</th>
+                              <th>Description</th>
+                              <th>Price</th>
+                              <th>Date added</th>
+                              <th>Quantity</th>
+                              <th></th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                      <div className="row center-align">
+                        <div className="col s12">
+                          <a
+                            href="#addItem"
+                            className="btn btn-small waves-effect waves-light blue darken-3 modal-trigger"
+                          >
+                            <i className="material-icons">add</i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

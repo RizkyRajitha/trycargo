@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loginUser } from "../../../actions/authActions";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 class LoginCustomer extends Component {
   constructor(props) {
@@ -43,9 +44,15 @@ class LoginCustomer extends Component {
     return (
       <div>
         <div className="row">
-          <div className="container">
+          <div
+            className="container"
+            style={{
+              position: "relative",
+              padding: "10% 15% 20% 15%",
+            }}
+          >
             <div className="row">
-              <div className="col s10 offset-s1">
+              <div className="col s12">
                 <div className="row"></div>
                 <div className="row center-align">
                   <h5>LOG IN</h5>
@@ -75,16 +82,16 @@ class LoginCustomer extends Component {
                       />
                       <label htmlFor="password">Password</label>
                       <div>
-                        <a href="#">
+                        <Link to="/authorization/resetpassword">
                           <b>Forgot Password?</b>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
                   <div className="row center">
                     <button
                       type="submit"
-                      className="modal-close waves-effect waves-light btn grey darken-3"
+                      className="waves-effect waves-light btn grey darken-3"
                     >
                       Log in
                     </button>

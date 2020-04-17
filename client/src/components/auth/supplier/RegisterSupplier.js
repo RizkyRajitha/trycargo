@@ -11,12 +11,16 @@ class RegisterSupplier extends Component {
       buisnessname: "",
       username: "",
       buisnessphone: "",
-      buisnessaddress: "",
-      deliveryaddress: "",
-      businessdistrict: "",
+      addressline1: "",
+      addressline2: "",
+      city: "",
+      district: "",
+      postalcode: "",
+      country: "",
       workinghours: "",
       phone: "",
       email: "",
+      aboutus: "",
       password: "",
       password2: "",
       errors: {},
@@ -32,9 +36,13 @@ class RegisterSupplier extends Component {
     const newUser = {
       buisnessname: this.state.buisnessname,
       username: this.state.username,
-      buisnessphone: this.state.buisnessphone,
-      buisnessaddress: this.state.buisnessaddress,
-      businessdistrict: this.state.businessdistrict,
+      addressline1: this.state.addressline1,
+      addressline2: this.state.addressline2,
+      city: this.state.city,
+      district: this.state.district,
+      postalcode: this.state.postalcode,
+      country: this.state.country,
+      aboutus: this.state.aboutus,
       workinghours: this.state.workinghours,
       email: this.state.email,
       buisnessphone: this.state.phone,
@@ -102,13 +110,79 @@ class RegisterSupplier extends Component {
                   </div>
                   <div className="row">
                     <div className="input-field col s12">
-                      <input
-                        value={this.state.buisnessaddress}
+                      <textarea
+                        value={this.state.aboutus}
                         onChange={this.onChange}
-                        name="buisnessaddress"
+                        name="aboutus"
+                        class="materialize-textarea"
+                      ></textarea>
+                      <label htmlFor="aboutus">About</label>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <input
+                        value={this.state.addressline1}
+                        onChange={this.onChange}
+                        name="addressline1"
                         type="text"
                       />
-                      <label htmlFor="buisnessaddress">Address</label>
+                      <label htmlFor="addressline1">Address Line 1</label>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <input
+                        value={this.state.addressline2}
+                        onChange={this.onChange}
+                        name="addressline2"
+                        type="text"
+                      />
+                      <label htmlFor="addressline2">Address Line 2</label>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <input
+                        value={this.state.city}
+                        onChange={this.onChange}
+                        name="city"
+                        type="text"
+                      />
+                      <label htmlFor="city">city</label>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <input
+                        value={this.state.district}
+                        onChange={this.onChange}
+                        name="district"
+                        type="text"
+                      />
+                      <label htmlFor="district">District</label>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <input
+                        value={this.state.postalcode}
+                        onChange={this.onChange}
+                        name="postalcode"
+                        type="text"
+                      />
+                      <label htmlFor="postalcode">Zip/Postal Code</label>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <input
+                        value={this.state.country}
+                        onChange={this.onChange}
+                        name="country"
+                        type="text"
+                      />
+                      <label htmlFor="country">Country</label>
                     </div>
                   </div>
                   <div className="row">

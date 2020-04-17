@@ -99,37 +99,40 @@ exports.editowner = (req, res) => {
   console.log("edit owner");
   var datain = req.body;
   console.log(datain);
-  console.log(req.file);
+  // console.log(req.file);
 
   ShopOwner.findOneAndUpdate(
     { _id: req.id },
     {
       $set: {
+        email: datain.email,
+        phone: datain.phone,
         buisnessname: datain.buisnessname,
+        username: datain.username,
+        hash: hash,
+        address: {
+          buisnessphone: datain.buisnessphone,
+          addressline1: datain.addressline1,
+          addressline2: datain.addressline2,
+          city: datain.city,
+          district: datain.district,
+          postalcode: datain.postalcode,
+          country: datain.country,
+        },
         aboutus: datain.aboutus,
-        buisnessphone: datain.buisnessphone,
-        buisnessaddress: datain.buisnessaddress,
-        buisnessdistrict: datain.buisnessdistrict,
-        workinghours: datain.workinghours,
       },
     }
   )
     .then((doc) => {
       console.log(doc);
 
-      res.status(200).json({ msg: "success" });
+      res.status(200).json({ msg: "success", data: doc });
     })
     .catch((err) => {
       console.log(err);
       res.status(500).send("err");
     });
 };
-
-
-
-
-
-
 
 exports.acceptorder = (req, res) => {
   console.log("accept order");

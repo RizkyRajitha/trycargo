@@ -27,13 +27,19 @@ var shopownerSchema = new Schema({
   buisnessphone: {
     type: String,
   },
-  buisnessaddress: {
-    type: String,
-  },
-  buisnessdistrict: {
-    type: String,
+  address: {
+    addressline1: { type: String },
+    addressline2: { type: String },
+    city: { type: String },
+    district: { type: String },
+    postalcode: { type: String },
+    country: { type: String },
+    aboutus: { type: String },
   },
   workinghours: {
+    type: String,
+  },
+  aboutus: {
     type: String,
   },
   items: [

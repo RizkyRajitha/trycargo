@@ -63,9 +63,16 @@ exports.signupowner = (req, res) => {
     buisnessname: datain.buisnessname,
     username: datain.username,
     hash: hash,
-    buisnessphone: datain.buisnessphone,
-    buisnessaddress: datain.buisnessaddress,
-    buisnessdistrict: datain.buisnessdistrict,
+    address: {
+      buisnessphone: datain.buisnessphone,
+      addressline1: this.state.addressline1,
+      addressline2: this.state.addressline2,
+      city: this.state.city,
+      district: this.state.district,
+      postalcode: this.state.postalcode,
+      country: this.state.country,
+    },
+    aboutus: this.state.aboutus,
   });
 
   newuser

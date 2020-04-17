@@ -3,28 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="Web site created using create-react-app"
     />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto"
-      rel="stylesheet"
-    />
     <!--Import Google Icon Font-->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <!--Import materialize.css-->
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="css/materialize.min.css"
-      media="screen,projection"
-    />
+
     <!-- <script src="https://use.fontawesome.com/d808c3f905.js"></script> -->
     <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
     <!--
@@ -32,6 +18,10 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -42,7 +32,6 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>tryCargo App</title>
   </head>
   <body>
@@ -59,23 +48,5 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
     <!--JavaScript at end of body for optimized loading-->
-    <script
-      type="text/javascript"
-      src="https://code.jquery.com/jquery-3.2.1.min.js"
-    ></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script>
-      $(document).ready(function () {
-        // Custom JS & jQuery here
-        //Init Side nav
-        $(".button-collapse").sideNav();
-        //Init Slider
-        $(".slider").slider({
-          height: 650,
-        });
-        $(".modal").modal();
-        $(".tabs").tabs({});
-      });
-    </script>
   </body>
 </html>

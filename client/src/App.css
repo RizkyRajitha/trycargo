@@ -8,26 +8,6 @@
   height: auto;
   object-fit: cover;
 }
-.tabs .tab a {
-  color: grey;
-  /*Custom Text Color*/
-}
-
-.tabs .tab a:hover {
-  color: black;
-  /*Custom Color On Hover*/
-}
-
-.tabs .tab a:focus.active {
-  color: rgb(24, 108, 204);
-  /*Custom Text Color While Active*/
-}
-
-.tabs .indicator {
-  background-color: rgb(24, 108, 204);
-  /*Custom Color Of Indicator*/
-}
-
 .landing {
   position: relative;
   background: url("./images/background.jpg") no-repeat;
@@ -38,6 +18,7 @@
 }
 
 .landing-inner {
+  align-content: center;
   padding-top: 400px;
 }
 
@@ -50,7 +31,7 @@
   height: 100%;
 }
 .btn {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 .btn:hover {
   opacity: 1;

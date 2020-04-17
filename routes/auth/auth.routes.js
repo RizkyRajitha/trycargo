@@ -69,7 +69,8 @@ exports.loginshopowner = (req, res) => {
             username: doc.username,
             buisnessname: doc.buisnessname,
             buisnessphone: doc.buisnessphone,
-            buisnessaddress: doc.buisnessaddress,
+            address: doc.address,
+            aboutus: doc.aboutus,
             workinghours: doc.workinghours,
             email: doc.email,
             items: doc.items,
@@ -93,7 +94,7 @@ exports.loginshopowner = (req, res) => {
 
 exports.forgotPasswordcustomer = (req, res) => {
   var email = req.body.email;
-
+  // console.log(req.body);
   console.log("in forgot password");
   User.findOne({ email: email })
     .then((result) => {

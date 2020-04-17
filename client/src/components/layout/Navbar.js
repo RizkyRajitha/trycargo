@@ -2,10 +2,17 @@ import React, { Component } from "react";
 import logo from "../../images/logo.png";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import M from "materialize-css/dist/js/materialize.min.js";
 
 import { logoutUser } from "../../actions/authActions";
 
 class Navbar extends Component {
+  componentDidMount() {
+    document.addEventListener("DOMContentLoaded", function () {
+      var elems = document.querySelectorAll(".sidenav");
+      var instances = M.Sidenav.init(elems);
+    });
+  }
   render() {
     const { isAuthenticated } = this.props.auth;
     return (
@@ -19,8 +26,8 @@ class Navbar extends Component {
                 </a>
                 <a
                   href="#"
-                  data-activates="mobile-nav"
-                  className="button-collapse"
+                  data-target="mobile-nav"
+                  className="sidenav-trigger"
                 >
                   <i className="material-icons">menu</i>
                 </a>
@@ -61,7 +68,7 @@ class Navbar extends Component {
             </div>
           </nav>
         </div>
-        <ul className="side-nav" id="mobile-nav">
+        <ul className="sidenav" id="mobile-nav">
           <li>
             <a href="#home">Home</a>
           </li>

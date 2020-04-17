@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-//Import User Creation Modal
-import CreateUser from "../auth/customer/CreateUser";
+import M from "materialize-css/dist/js/materialize.min.js";
 
 //Import Image Files
 import groceries from "../../images/groceries.jpg";
@@ -14,16 +13,21 @@ import supply_depot2 from "../../images/store.jpg";
 import food_supply from "../../images/food_supply.jfif";
 import food_truck from "../../images/food_truck.jpg";
 import stay_home from "../../images/stay_home.jpg";
+import virus from "../../images/virus.jpg";
 // import { PropTypes } from "prop-types";
 // import { connect } from "react-redux";
 
 class Landing extends Component {
   componentDidMount() {
+    const elem = document.querySelector(".slider");
+    const instance = M.Slider.init(elem, {
+      height: 650,
+    });
     if (this.props.auth.isAuthenticated) {
-      if (this.props.auth.user.type == "customer") {
+      if (this.props.auth.user.type === "customer") {
         this.props.history.push("/dashboard/customer");
       }
-      if (this.props.auth.user.type == "owner") {
+      if (this.props.auth.user.type === "owner") {
         this.props.history.push("/dashboard/supplier");
       }
     }
@@ -79,6 +83,15 @@ class Landing extends Component {
                 <h2>Stay Home,Stay Safe</h2>
                 <h5 className="light white-text text-darken-3 hide-on-small-only">
                   Get food delivered to your home
+                </h5>
+              </div>
+            </li>
+            <li>
+              <img className="img-responsive" src={virus}></img>
+              <div className="caption left-align">
+                <h2>SURVIVE</h2>
+                <h5 className="light white-text text-darken-3 hide-on-small-only">
+                  Prepare and prevent,don't repair and repent
                 </h5>
               </div>
             </li>

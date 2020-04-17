@@ -29,8 +29,14 @@ var userSchema = new Schema({
   district: {
     type: String,
   },
-  deliveryAddress: {
-    type: String,
+  address: {
+    addressline1: { type: String },
+    addressline2: { type: String },
+    city: { type: String },
+    district: { type: String },
+    postalcode: { type: String },
+    country: { type: String },
+    aboutus: { type: String },
   },
   // orders: [
   //   {
