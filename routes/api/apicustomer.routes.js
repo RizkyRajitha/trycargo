@@ -32,21 +32,22 @@ exports.customerdashboard = (req, res) => {
 
       Order.findOne({ customerId: req.id })
         .then((doc2) => {
-          temppayload = {
-            name: doc.firstName + " " + doc.lastName,
-            district: doc.district,
-            orders: doc2,
-          };
+          ShopOwner.find({ "address.district": doc.address.district })
+            .then((result) => {
+              temppayload = {
+                name: doc.firstName + " " + doc.lastName,
+                district: doc.address.district,
+                orders: doc2,
+                shops: result,
+              };
 
-
-          User.find({}).then((result) => {
-            
-          }).catch((err) => {
-            
-          });
-
-
-          res.status(200).json({ msg: "success", data: temppayload });
+              console.log(temppayload);
+              res.status(200).json({ msg: "success", data: temppayload });
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(500).send("err");
+            });
         })
         .catch((err) => {
           console.log(err);
