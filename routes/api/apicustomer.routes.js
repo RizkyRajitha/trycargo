@@ -38,6 +38,14 @@ exports.customerdashboard = (req, res) => {
             orders: doc2,
           };
 
+
+          User.find({}).then((result) => {
+            
+          }).catch((err) => {
+            
+          });
+
+
           res.status(200).json({ msg: "success", data: temppayload });
         })
         .catch((err) => {
