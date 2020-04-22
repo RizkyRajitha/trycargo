@@ -29,13 +29,13 @@ var orderSchema = new Schema({
       itemId: {
         type: String,
       },
+      itemName: {
+        type: String,
+      },
       unitprice: {
         type: String,
       },
       quantity: {
-        type: String,
-      },
-      itemName: {
         type: String,
       },
     },

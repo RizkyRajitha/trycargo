@@ -109,9 +109,8 @@ exports.editowner = (req, res) => {
         phone: datain.phone,
         buisnessname: datain.buisnessname,
         username: datain.username,
-        hash: hash,
+        buisnessphone: datain.buisnessphone,
         address: {
-          buisnessphone: datain.buisnessphone,
           addressline1: datain.addressline1,
           addressline2: datain.addressline2,
           city: datain.city,

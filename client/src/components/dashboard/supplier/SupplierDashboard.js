@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Moment from "react-moment";
-import Swal from "sweetalert2";
 import M from "materialize-css/dist/js/materialize.min.js";
 
 import { addItem } from "../../../actions/stockActions";
+import { updateProfile } from "../../../actions/profileActions";
 
 import buisnesslogo from "../../../images/gedara.jpg";
 
@@ -97,19 +97,22 @@ class SupplierDashboard extends Component {
   handleEditProfile(e) {
     e.preventDefault();
     const profileData = {
+      id: this.props.auth.user.id,
       username: this.state.username,
       email: this.state.email,
       buisnessname: this.state.buisnessname,
       buisnessphone: this.state.buisnessphone,
-      addressline1: this.state.addressline1,
-      addressline2: this.state.addressline2,
-      city: this.state.city,
-      district: this.state.district,
-      postalcode: this.state.postalcode,
-      country: this.state.country,
+      addressline1: this.state.address.addressline1,
+      addressline2: this.state.address.addressline2,
+      city: this.state.address.city,
+      district: this.state.address.district,
+      postalcode: this.state.address.postalcode,
+      country: this.state.address.country,
       aboutus: this.state.aboutus,
       workinghours: this.state.workinghours,
     };
+    // console.log(profileData);
+    this.props.updateProfile(profileData);
   }
   displayOrders(items) {}
   render() {
@@ -510,10 +513,13 @@ class SupplierDashboard extends Component {
 SupplierDashboard.propTypes = {
   auth: PropTypes.object.isRequired,
   addItem: PropTypes.func.isRequired,
+  updateProfile: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { addItem })(SupplierDashboard);
+export default connect(mapStateToProps, { addItem, updateProfile })(
+  SupplierDashboard
+);

@@ -2,7 +2,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { UPDATE_PROFILE } from "./types";
 
-export const addItem = (userData) => (dispatch) => {
+export const updateProfile = (userData) => (dispatch) => {
   axios
     .post("/apiowner/owneredit", userData)
     .then((res) => {

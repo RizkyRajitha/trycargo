@@ -26,9 +26,6 @@ var userSchema = new Schema({
   phone: {
     type: String,
   },
-  district: {
-    type: String,
-  },
   address: {
     addressline1: { type: String },
     addressline2: { type: String },
@@ -36,7 +33,6 @@ var userSchema = new Schema({
     district: { type: String },
     postalcode: { type: String },
     country: { type: String },
-    aboutus: { type: String },
   },
   // orders: [
   //   {

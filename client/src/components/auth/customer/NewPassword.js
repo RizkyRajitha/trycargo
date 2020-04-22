@@ -19,7 +19,7 @@ class NewPassword extends Component {
   onSubmit(e) {
     e.preventDefault();
     const data = {
-      password: this.state.password,
+      password: this.state.password1,
       token: this.props.match.params.token,
     };
     this.props.newPassword(data);
@@ -49,6 +49,7 @@ class NewPassword extends Component {
                     id="password1"
                     placeholder="Password"
                   ></input>
+
                   <input
                     className="input-field"
                     value={this.state.password2}
@@ -59,9 +60,11 @@ class NewPassword extends Component {
                     id="password2"
                     placeholder="Confirm Password"
                   ></input>
-                  {this.state.password1 !== this.state.password2 && (
-                    <span className="red-text">Passwords must match</span>
-                  )}
+                  <div className="row">
+                    {this.state.password1 !== this.state.password2 && (
+                      <span className="red-text">Passwords must match</span>
+                    )}
+                  </div>
                 </div>
                 <div className="card-action">
                   <button
