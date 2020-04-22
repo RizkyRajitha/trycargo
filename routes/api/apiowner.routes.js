@@ -139,6 +139,45 @@ exports.acceptorder = (req, res) => {
   console.log(datain);
 };
 
+exports.edititem = (req, res) => {
+  console.log("edit item");
+  var datain = req.body;
+  console.log(datain);
+
+  cloudinary.uploader.destroy("trycargo/" + datain.itemid, function (
+    error,
+    result
+  ) {
+    if (err) {
+      console.log(error);
+    } else {
+      console.log(result);
+      fileupcloud(datain.itemid, req.file.path)
+        .then((url) => {
+          ShopOwner.findOneAndUpdate(
+            { _id: req.id, "items.itemId": datain.itemid },
+            {
+              $set: {
+                "item.$.itemName": datain.itemName,
+                "item.$.unitPrice": datain.unitPrice,
+                "item.$.updateddate": new Date().toISOString(),
+                "item.$.discription": datain.discription,
+                "item.$.quantity": datain.quantity,
+                "item.$.imgurl": url,
+              },
+            }
+          )
+            .then((docs) => {
+              console.log(docs);
+              res.status(200).json({ msg: "success" });
+            })
+            .catch((err) => console.log(err));
+        })
+        .catch((err) => console.log(err));
+    }
+  });
+};
+
 const fileupcloud = function (filename, path) {
   console.log("cloud");
   return new Promise((resolve, reject) => {

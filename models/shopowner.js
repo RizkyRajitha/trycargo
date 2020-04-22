@@ -38,9 +38,6 @@ var shopownerSchema = new Schema({
     postalcode: { type: String },
     country: { type: String },
   },
-  aboutus: {
-    type: String,
-  },
   workinghours: {
     type: String,
   },

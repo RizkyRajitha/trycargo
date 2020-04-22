@@ -22,7 +22,15 @@ exports.signupcustomer = (req, res) => {
     phone: datain.phone,
     firstName: datain.firstName,
     lastName: datain.lastName,
-    deliveryAddress: datain.deliveryAddress,
+    address: {
+      buisnessphone: datain.buisnessphone,
+      addressline1: datain.addressline1,
+      addressline2: datain.addressline2,
+      city: datain.city,
+      district: datain.district,
+      postalcode: datain.postalcode,
+      country: datain.country,
+    },
     hash: hash,
   });
 
@@ -65,14 +73,14 @@ exports.signupowner = (req, res) => {
     hash: hash,
     address: {
       buisnessphone: datain.buisnessphone,
-      addressline1: this.state.addressline1,
-      addressline2: this.state.addressline2,
-      city: this.state.city,
-      district: this.state.district,
-      postalcode: this.state.postalcode,
-      country: this.state.country,
+      addressline1: datain.addressline1,
+      addressline2: datain.addressline2,
+      city: datain.city,
+      district: datain.district,
+      postalcode: datain.postalcode,
+      country: datain.country,
     },
-    aboutus: this.state.aboutus,
+    aboutus: datain.aboutus,
   });
 
   newuser
