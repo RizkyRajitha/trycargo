@@ -61,7 +61,7 @@ var jwthelpercustomer = (req, res, next) => {
   const token = req.headers.authorization;
   //  req.body.token || req.query.token || req.headers['x-access-token']
   // decode token
-  // console.log(token);
+  console.log(token);
   if (token) {
     // verifies secret and checks exp
     jwt.verify(token, jwtsecret, function (err, decoded) {
@@ -102,6 +102,8 @@ app.use(
   require("./routes/api/apicustomer.router")
 );
 app.use("/apiowner", jwthelperowner, require("./routes/api/apiowner.router"));
+
+app.use("/util", require("./routes/util/utilrouter"));
 
 try {
   mongoose.connect(

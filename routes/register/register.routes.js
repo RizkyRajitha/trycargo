@@ -23,9 +23,8 @@ exports.signupcustomer = (req, res) => {
     firstName: datain.firstName,
     lastName: datain.lastName,
     address: {
-      buisnessphone: datain.buisnessphone,
-      addressline1: datain.addressline1,
-      addressline2: datain.addressline2,
+      addressline1: datain.Addressline1,
+      addressline2: datain.Addressline2,
       city: datain.city,
       district: datain.district,
       postalcode: datain.postalcode,

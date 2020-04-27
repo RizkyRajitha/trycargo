@@ -77,6 +77,55 @@ exports.customerdashboard = (req, res) => {
     });
 };
 
+exports.customerdata = (req, res) => {
+  User.findOne({ _id: req.id })
+    .then((doc) => {
+      var payload = {
+        addressline1: doc.address.addressline1,
+        addressline2: doc.address.addressline2,
+        city: doc.address.city,
+        district: doc.address.district,
+        postalcode: doc.address.postalcode,
+        phone: doc.phone,
+      };
+
+      console.log(payload);
+      res.json(payload);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.editprofile = (req, res) => {
+  var datain = req.body;
+
+  console.log(datain);
+
+  User.findOneAndUpdate(
+    { _id: req.id },
+    {
+      $set: {
+        "address.addressline1": datain.addressline1,
+        "address.addressline2": datain.addressline2,
+        "address.city": datain.city,
+        "address.district": datain.district,
+        "address.postalcode": datain.postalcode,
+        
+        phone: datain.phone,
+      },
+    }
+  )
+    .then((doc) => {
+      console.log(doc);
+      res.json({ msg: "success" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ msg: "err" });
+    });
+};
+
 exports.neworder = (req, res) => {
   console.log("new order");
   var datain = req.body;

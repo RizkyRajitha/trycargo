@@ -4,27 +4,36 @@ import PropTypes from "prop-types";
 import Moment from "react-moment";
 import Swal from "sweetalert2";
 import M from "materialize-css/dist/js/materialize.min.js";
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
 
+import Select from "react-select";
 import { getStores, newOrder } from "../../../actions/stockActions";
 
 import profileImage from "../../../images/background.jpg";
 import cover from "../../../images/cover.jpg";
-
+import axios from "axios";
 class CustomerDashboard extends Component {
   constructor() {
     super();
     this.state = {
+      open: false,
+      addressline1: "",
+      addressline2: "",
+      city: "",
+      district: "",
+      postalcode: "",
       currentShop: {
         id: "",
         name: "",
         address: {},
         phone: "",
         email: "",
-        workinghours: "",
         about: "",
-        address: "",
+
         items: [],
       },
+      districtlist: [],
       currentOrder: [],
       netprice: "",
     };
@@ -33,7 +42,48 @@ class CustomerDashboard extends Component {
     this.handleAddtoCart = this.handleAddtoCart.bind(this);
     this.handleOrder = this.handleOrder.bind(this);
   }
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
   componentDidMount() {
+    axios
+      .get("/util/getdistrictlist")
+      .then((result) => {
+        // console.log(result.data.districtlist);
+        var distlist = result.data.districtlist.map((ele) => {
+          return { label: ele, value: ele };
+        });
+        // console.log(distlist);
+        this.setState({ districtlist: distlist });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios
+      .get("/apicustomer/customerdata")
+      .then((result) => {
+        // console.log("custoemer dataa");
+        console.log(result.data);
+        var datain = result.data;
+
+        this.setState({
+          addressline1: datain.addressline1,
+          addressline2: datain.addressline2,
+          city: datain.city,
+          district: datain.district,
+          postalcode: datain.postalcode,
+          phone: datain.phone,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     document.addEventListener("DOMContentLoaded", function () {
       const modal = document.querySelectorAll(".modal");
       M.Modal.init(modal);
@@ -182,6 +232,57 @@ class CustomerDashboard extends Component {
     ));
     return shopNames;
   }
+  handleChangedistrict = (selectedOption) => {
+    this.setState({ district: selectedOption.label });
+  };
+
+  handleEditProfile = (e) => {
+    e.preventDefault();
+
+    var payload = {
+      addressline1: this.state.addressline1,
+      addressline2: this.state.addressline2,
+      city: this.state.city,
+      district: this.state.district,
+      postalcode: this.state.postalcode,
+      phone: this.state.phone,
+    };
+
+    console.log(payload);
+
+    axios
+      .post("/apicustomer/editprofile", payload)
+      .then((result) => {
+        console.log(result.data);
+        if (result.data.msg === "success") {
+          axios
+            .get("/apicustomer/customerdata")
+            .then((result) => {
+              // console.log("custoemer dataa");
+              console.log(result.data);
+              var datain = result.data;
+              this.onCloseModal();
+              this.setState({
+                addressline1: datain.addressline1,
+                addressline2: datain.addressline2,
+                city: datain.city,
+                district: datain.district,
+                postalcode: datain.postalcode,
+                phone: datain.phone,
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          Swal.fire("Saved", "your details saved successfully", "success");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire("Whoops", "we got an error", "error");
+      });
+  };
+
   render() {
     const {
       firstName,
@@ -192,6 +293,96 @@ class CustomerDashboard extends Component {
     } = this.props.auth.user;
     return (
       <div>
+        {" "}
+        <Modal open={this.state.open} onClose={this.onCloseModal} center>
+          <div
+            hidden={false}
+            className="modal-content"
+            style={{ padding: "20 15 20 15" }}
+          >
+            <h4>Edit Profile</h4>
+            <form noValidate onSubmit={this.handleEditProfile}>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input
+                    value={this.state.phone}
+                    onChange={(e) => this.setState({ phone: e.target.value })}
+                    name="phone"
+                    id="phone"
+                    type="text"
+                  />
+                  <label htmlFor="buisnessphone">Contact Number</label>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="input-field col s12">
+                  <input
+                    value={this.state.addressline1}
+                    onChange={(e) =>
+                      this.setState({ addressline1: e.target.value })
+                    }
+                    name="addressline1"
+                    type="text"
+                  />
+                  <label htmlFor="addressline1">Address Line 1</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input
+                    value={this.state.addressline2}
+                    onChange={(e) =>
+                      this.setState({ addressline2: e.target.value })
+                    }
+                    name="addressline2"
+                    type="text"
+                  />
+                  <label htmlFor="addressline2">Address Line 2</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input
+                    value={this.state.city}
+                    onChange={(e) => this.setState({ city: e.target.value })}
+                    name="city"
+                    type="text"
+                  />
+                  <label htmlFor="city">city</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <Select
+                    // defaultInputValue={[{ lable: "district", value: 1 }]}
+                    options={this.state.districtlist}
+                    onChange={this.handleChangedistrict}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input
+                    value={this.state.postalcode}
+                    onChange={(e) =>
+                      this.setState({ postalcode: e.target.value })
+                    }
+                    name="postalcode"
+                    type="text"
+                  />
+                  <label htmlFor="postalcode">Zip/Postal Code</label>
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="btn btn-medium waves-effect waves-light blue darken-3"
+              >
+                Save
+              </button>
+            </form>
+          </div>
+        </Modal>
         <div className="row">
           <div className="col s12 m3">
             <div className="card grey darken-3">
@@ -209,25 +400,31 @@ class CustomerDashboard extends Component {
                 <ul className="grey-text">
                   <li>Email : {email}</li>
                   <br></br>
-                  <li>Telephone : {phone}</li>
+                  <li>Telephone : {this.state.phone}</li>
                   <br></br>
-                  <li>Address : {deliveryAddress}</li>
+                  <li>
+                    Address :{" "}
+                    {this.state.addressline1 +
+                      " " +
+                      this.state.addressline2 +
+                      " " +
+                      this.state.city +
+                      " " +
+                      this.state.district +
+                      " " +
+                      this.state.postalcode}
+                  </li>
                 </ul>
               </div>
               <div className="card-action center-align">
-                <a
-                  href="#"
+                <button
                   onClick={() => {
-                    Swal.fire(
-                      "Success",
-                      "Item has been added to your store",
-                      "success"
-                    );
+                    this.onOpenModal();
                   }}
                   className="btn btn-medium waves-effect waves-light blue darken-3"
                 >
                   Edit Profile
-                </a>
+                </button>
               </div>
             </div>
             <div className="card grey lighten-3">

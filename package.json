@@ -17,6 +17,7 @@
     "node-modules": "^1.0.1",
     "nodemon": "^2.0.3",
     "sendgrid": "^5.2.3",
+    "twilio": "^3.42.2",
     "uuid": "^7.0.3"
   },
   "devDependencies": {},

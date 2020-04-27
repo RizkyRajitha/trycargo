@@ -3,7 +3,9 @@ import { withRouter } from "react-router-dom";
 import { registerUser } from "../../../actions/authActions";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
-
+import axios from "axios";
+import Select from "react-select";
+import Swal from "sweetalert2";
 class RegisterCustomer extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +18,12 @@ class RegisterCustomer extends Component {
       password: "",
       password2: "",
       errors: {},
+      Addressline1: "",
+      Addressline2: "",
+      city: "",
+      postalcode: "",
+      district: "",
+      districtlist: [],
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -30,12 +38,53 @@ class RegisterCustomer extends Component {
       lastName: this.state.lastname,
       email: this.state.email,
       phone: this.state.phone,
-      deliveryAddress: this.state.deliveryAddress,
+      Addressline1: this.state.Addressline1,
+      Addressline2: this.state.Addressline2,
+      city: this.state.city,
+      district: this.state.district,
+      postalcode: this.state.postalcode,
       password: this.state.password,
     };
-    // console.log(newUser);
-    this.props.registerUser(newUser, this.props.history, "customer");
+    console.log(newUser);
+
+    axios
+      .post("/reg/signupcustomer", newUser)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.msg === "success") {
+          this.props.history.push("/authorization/customer/login");
+        } else if (res.data.msg === "dupuser") {
+          Swal.fire("Duplicate User", "This email is Already taken", "error");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire("Error", "Server Err", "error");
+      });
+
+    // this.props.registerUser(newUser, this.props.history, "customer");
   }
+
+  componentDidMount() {
+    axios
+      .get("/util/getdistrictlist")
+      .then((result) => {
+        // console.log(result.data.districtlist);
+        var distlist = result.data.districtlist.map((ele) => {
+          return { label: ele, value: ele };
+        });
+        // console.log(distlist);
+        this.setState({ districtlist: distlist });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  handleChangedistrict = (selectedOption) => {
+    this.setState({ district: selectedOption.label });
+  };
+
   render() {
     return (
       <div className="center-align">
@@ -76,14 +125,54 @@ class RegisterCustomer extends Component {
                   <div className="row">
                     <div className="input-field col s12">
                       <input
-                        value={this.state.deliveryAddress}
+                        value={this.state.Addressline1}
                         onChange={this.onChange}
-                        name="deliveryAddress"
+                        name="Addressline1"
                         type="text"
                       />
-                      <label htmlFor="deliveryAddress">
-                        Address of drop point
-                      </label>
+                      <label htmlFor="Addressline1">Address line 1</label>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <input
+                        value={this.state.Addressline2}
+                        onChange={this.onChange}
+                        name="Addressline2"
+                        type="text"
+                      />
+                      <label htmlFor="Addressline2">Address line 2</label>
+                    </div>
+                  </div>{" "}
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <input
+                        value={this.state.city}
+                        onChange={this.onChange}
+                        name="city"
+                        type="text"
+                      />
+                      <label htmlFor="city">City</label>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <Select
+                        options={this.state.districtlist}
+                        onChange={this.handleChangedistrict}
+                      />
+                      {/* <label>District</label> */}
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="input-field col s12">
+                      <input
+                        value={this.state.postalcode}
+                        onChange={this.onChange}
+                        name="postalcode"
+                        type="text"
+                      />
+                      <label htmlFor="deliveryAddress">Postal code</label>
                     </div>
                   </div>
                   <div className="row">

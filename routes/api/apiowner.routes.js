@@ -21,6 +21,11 @@ cloudinary.config({
   api_secret: cloudinary_api_secret,
 });
 
+// DANGER! This is insecure. See http://twil.io/secure
+const accountSid = require("../../config/env").twilliosid;
+const authToken = require("../../config/env").twilliotoken;
+const smsclient = require("twilio")(accountSid, authToken);
+
 exports.ownerdashboard = (req, res) => {
   console.log("ownerdahsboard");
   var datain = req.body;
@@ -133,10 +138,41 @@ exports.editowner = (req, res) => {
     });
 };
 
-exports.acceptorder = (req, res) => {
+exports.changeorderstatus = (req, res) => {
   console.log("accept order");
   var datain = req.body;
   console.log(datain);
+
+  Order.findOneAndUpdate(
+    { _id: datain.orderid },
+    {
+      $set: {
+        orderStatus: datain.status,
+      },
+    }
+  )
+    .then((orderDoc) => {
+      res.json({ msg: "success" });
+
+      ShopOwner.findOne({ _id: orderDoc.ownerId })
+        .then((ownerDoc) => {
+          User.findOne({ _id: orderDoc.customerId })
+            .then((customerdoc) => {
+              if (datain.status === "accepted") {
+                client.messages
+                  .create({
+                    body: `Hi ${customerdoc.firstName} \nyour order ${orderDoc.orderId} is confirmed\n please dial ${ownerDoc.buisnessphone} for further verifications \n${ownerDoc.buisnessname}`,
+                    from: require("../../config/env").twilliophonumber,
+                    to: require("../../config/env").customernumber,
+                  })
+                  .then((message) => console.log(message.sid));
+              }
+            })
+            .catch((err) => {});
+        })
+        .catch((err) => {});
+    })
+    .catch((err) => {});
 };
 
 exports.edititem = (req, res) => {

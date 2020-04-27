@@ -178,6 +178,8 @@ class SupplierDashboard extends Component {
                               ", " +
                               this.state.address.district +
                               ", " +
+                              this.state.address.postalcode +
+                              ", " +
                               this.state.address.country}
                           </li>
                           <br></br>
@@ -196,6 +198,7 @@ class SupplierDashboard extends Component {
                         </a>
                         <div id="editProfile" className="modal">
                           <div
+                            hidden={false}
                             className="modal-content"
                             style={{ padding: "20 15 20 15" }}
                           >
